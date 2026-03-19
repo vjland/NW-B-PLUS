@@ -86,8 +86,8 @@ const chart = new Chart(ctx, {
       legend: { display: false },
       tooltip: {
         callbacks: {
-          title: (context) => \`Hand \${context[0].label}\`,
-          label: (context) => \`Running Sum: \${context.raw}\`
+          title: (context) => `Hand ${context[0].label}`,
+          label: (context) => `Running Sum: ${context.raw}`
         }
       },
       zoom: {
@@ -261,7 +261,7 @@ const updateUI = () => {
     const tr = document.createElement('tr');
     tr.className = 'hover:bg-zinc-800/30 transition-colors';
     
-    const scoreStr = log.playerValue !== undefined ? \`\${log.playerValue}-\${log.bankerValue}\` : '-';
+    const scoreStr = log.playerValue !== undefined ? `${log.playerValue}-${log.bankerValue}` : '-';
     
     let winColor = 'text-green-400';
     if (log.winner === 'Player') winColor = 'text-blue-400';
@@ -277,17 +277,17 @@ const updateUI = () => {
     if (log.runningSum > 0) { sumColor = 'text-green-400'; sumPrefix = '+'; }
     else if (log.runningSum < 0) { sumColor = 'text-red-400'; }
 
-    tr.innerHTML = \`
-      <td class="px-2 py-3 text-zinc-100">\${log.handNumber}</td>
-      <td class="px-2 py-3">\${scoreStr}</td>
-      <td class="px-2 py-3 font-medium \${winColor}">\${log.winner.charAt(0)}\${log.isNatural ? '(N)' : ''}</td>
+    tr.innerHTML = `
+      <td class="px-2 py-3 text-zinc-100">${log.handNumber}</td>
+      <td class="px-2 py-3">${scoreStr}</td>
+      <td class="px-2 py-3 font-medium ${winColor}">${log.winner.charAt(0)}${log.isNatural ? '(N)' : ''}</td>
       <td class="px-2 py-3">
-        <span class="inline-flex items-center justify-center w-6 h-6 rounded text-xs font-bold \${betClass}">
-          \${log.betPlaced ? log.betPlaced.charAt(0) : '-'}
+        <span class="inline-flex items-center justify-center w-6 h-6 rounded text-xs font-bold ${betClass}">
+          ${log.betPlaced ? log.betPlaced.charAt(0) : '-'}
         </span>
       </td>
-      <td class="px-2 py-3 font-bold \${sumColor}">\${sumPrefix}\${log.runningSum}</td>
-    \`;
+      <td class="px-2 py-3 font-bold ${sumColor}">${sumPrefix}${log.runningSum}</td>
+    `;
     logTbody.appendChild(tr);
   });
 
@@ -298,12 +298,12 @@ const updateUI = () => {
     btnLiveReset.disabled = liveLogs.length === 0;
 
     // Update Winner Buttons
-    btnWinnerPlayer.className = \`aspect-square flex items-center justify-center rounded-lg text-xl font-bold border \${liveWinner === 'Player' ? 'bg-blue-600 border-blue-600 text-white' : 'border-zinc-700 text-zinc-400 hover:bg-zinc-800/50'}\`;
-    btnWinnerBanker.className = \`aspect-square flex items-center justify-center rounded-lg text-xl font-bold border \${liveWinner === 'Banker' ? 'bg-red-600 border-red-600 text-white' : 'border-zinc-700 text-zinc-400 hover:bg-zinc-800/50'}\`;
+    btnWinnerPlayer.className = `aspect-square flex items-center justify-center rounded-lg text-xl font-bold border ${liveWinner === 'Player' ? 'bg-blue-600 border-blue-600 text-white' : 'border-zinc-700 text-zinc-400 hover:bg-zinc-800/50'}`;
+    btnWinnerBanker.className = `aspect-square flex items-center justify-center rounded-lg text-xl font-bold border ${liveWinner === 'Banker' ? 'bg-red-600 border-red-600 text-white' : 'border-zinc-700 text-zinc-400 hover:bg-zinc-800/50'}`;
     
     // Update Natural Buttons
-    btnNaturalY.className = \`aspect-square flex items-center justify-center rounded-lg text-xl font-bold border \${liveIsNatural === true ? 'bg-green-600 border-green-600 text-white' : 'border-zinc-700 text-zinc-400 hover:bg-zinc-800/50'}\`;
-    btnNaturalN.className = \`aspect-square flex items-center justify-center rounded-lg text-xl font-bold border \${liveIsNatural === false ? 'bg-zinc-600 border-zinc-600 text-white' : 'border-zinc-700 text-zinc-400 hover:bg-zinc-800/50'}\`;
+    btnNaturalY.className = `aspect-square flex items-center justify-center rounded-lg text-xl font-bold border ${liveIsNatural === true ? 'bg-green-600 border-green-600 text-white' : 'border-zinc-700 text-zinc-400 hover:bg-zinc-800/50'}`;
+    btnNaturalN.className = `aspect-square flex items-center justify-center rounded-lg text-xl font-bold border ${liveIsNatural === false ? 'bg-zinc-600 border-zinc-600 text-white' : 'border-zinc-700 text-zinc-400 hover:bg-zinc-800/50'}`;
   }
 };
 
