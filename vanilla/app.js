@@ -86,8 +86,8 @@ const chart = new Chart(ctx, {
       legend: { display: false },
       tooltip: {
         callbacks: {
-          title: (context) => `Hand ${context[0].label}`,
-          label: (context) => `Running Sum: ${context.raw}`
+          title: (context) => 'Hand ' + context[0].label,
+          label: (context) => 'Running Sum: ' + context.raw
         }
       },
       zoom: {
