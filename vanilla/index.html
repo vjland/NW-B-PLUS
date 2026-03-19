@@ -23,6 +23,10 @@
               400: '#fbbf24',
               500: '#f59e0b',
               600: '#d97706',
+            },
+            live: {
+              500: '#91D06C',
+              600: '#7bc055',
             }
           }
         }
@@ -49,7 +53,7 @@
     <button id="btn-simu-refresh" class="p-2 bg-amber-500 hover:bg-amber-600 text-zinc-950 rounded-lg transition-colors shadow-sm" title="Simulate New Shoe">
       <i data-lucide="refresh-cw" class="w-5 h-5"></i>
     </button>
-    <button id="btn-live-panel-toggle" class="hidden p-2 rounded-lg transition-colors shadow-sm bg-amber-500 hover:bg-amber-600 text-zinc-950" title="Toggle Input Panel">
+    <button id="btn-live-panel-toggle" class="hidden p-2 rounded-lg transition-colors shadow-sm bg-live-500 hover:bg-live-600 text-zinc-950" title="Toggle Input Panel">
       <i data-lucide="pencil" class="w-5 h-5"></i>
     </button>
   </div>
@@ -68,12 +72,12 @@
         </div>
 
         <div class="flex items-center gap-2 mt-1">
-          <input type="checkbox" id="autoHide" class="rounded border-zinc-700 bg-zinc-950 text-amber-500 focus:ring-amber-500">
+          <input type="checkbox" id="autoHide" class="rounded border-zinc-700 bg-zinc-950 text-live-500 focus:ring-live-500">
           <label for="autoHide" class="text-[11px] leading-tight text-zinc-400">Auto hide</label>
         </div>
 
         <div class="flex gap-2 mt-2">
-          <button id="btn-live-confirm" disabled class="flex-1 py-2 bg-green-600 hover:bg-green-700 disabled:opacity-50 disabled:hover:bg-green-600 text-white rounded text-sm font-medium transition-colors">Confirm</button>
+          <button id="btn-live-confirm" disabled class="flex-1 py-2 bg-live-500 hover:bg-live-600 disabled:opacity-50 disabled:hover:bg-live-500 text-zinc-950 rounded text-sm font-medium transition-colors">Confirm</button>
         </div>
         <div class="flex gap-2">
           <button id="btn-live-undo" disabled class="flex-1 py-1.5 bg-zinc-800 hover:bg-zinc-700 disabled:opacity-50 text-zinc-100 rounded text-xs font-medium transition-colors">Undo</button>
@@ -131,6 +135,6 @@
     </div>
   </div>
 
-  <script src="app.js?v=2"></script>
+  <script src="app.js?v=3"></script>
 </body>
 </html>

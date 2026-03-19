@@ -310,13 +310,13 @@ export default function App() {
       {
         label: 'Running Sum',
         data: currentChartData,
-        borderColor: '#F59E0B',
-        backgroundColor: 'rgba(245, 158, 11, 0.1)',
+        borderColor: appMode === 'simu' ? '#F59E0B' : '#91D06C',
+        backgroundColor: appMode === 'simu' ? 'rgba(245, 158, 11, 0.1)' : 'rgba(145, 208, 108, 0.1)',
         borderWidth: 2,
         tension: 0.1,
         pointRadius: 0,
         pointHoverRadius: 4,
-        pointBackgroundColor: '#F59E0B',
+        pointBackgroundColor: appMode === 'simu' ? '#F59E0B' : '#91D06C',
       }
     ]
   };
@@ -370,7 +370,7 @@ export default function App() {
   };
 
   return (
-    <div className="h-screen w-full flex flex-col bg-zinc-950 text-zinc-100 font-sans overflow-hidden">
+    <div className="h-[100dvh] w-full flex flex-col bg-zinc-950 text-zinc-100 font-sans overflow-hidden">
       {/* Header */}
       <div className="flex-none flex justify-between items-center p-4 bg-zinc-900 border-b border-zinc-800 shadow-sm z-10">
         <div className="flex items-center gap-4">
@@ -384,7 +384,7 @@ export default function App() {
             </button>
             <button 
               onClick={() => setAppMode('live')}
-              className={`px-3 py-1 rounded-md text-sm font-medium transition-colors ${appMode === 'live' ? 'bg-amber-500 text-zinc-950' : 'text-zinc-400 hover:text-zinc-100'}`}
+              className={`px-3 py-1 rounded-md text-sm font-medium transition-colors ${appMode === 'live' ? 'bg-live-500 text-zinc-950' : 'text-zinc-400 hover:text-zinc-100'}`}
             >
               Live
             </button>
@@ -409,7 +409,7 @@ export default function App() {
         ) : (
           <button
             onClick={() => setIsPanelOpen(!isPanelOpen)}
-            className={`p-2 rounded-lg transition-colors shadow-sm ${isPanelOpen ? 'bg-amber-600 text-zinc-950' : 'bg-amber-500 hover:bg-amber-600 text-zinc-950'}`}
+            className={`p-2 rounded-lg transition-colors shadow-sm ${isPanelOpen ? 'bg-live-600 text-zinc-950' : 'bg-live-500 hover:bg-live-600 text-zinc-950'}`}
             title="Toggle Input Panel"
           >
             <Pencil className="w-5 h-5" />
@@ -440,12 +440,12 @@ export default function App() {
                 })}
                 {['Y', 'N'].map(n => {
                   const isSelected = liveIsNatural === (n === 'Y');
-                  const activeColor = n === 'Y' ? 'bg-green-600 border-green-600' : 'bg-zinc-600 border-zinc-600';
+                  const activeColor = n === 'Y' ? 'bg-live-500 border-live-500 text-zinc-950' : 'bg-zinc-600 border-zinc-600 text-white';
                   return (
                     <button
                       key={n}
                       onClick={() => setLiveIsNatural(n === 'Y')}
-                      className={`aspect-square flex items-center justify-center rounded-lg text-xl font-bold border ${isSelected ? `${activeColor} text-white` : 'border-zinc-700 text-zinc-400 hover:bg-zinc-800/50'}`}
+                      className={`aspect-square flex items-center justify-center rounded-lg text-xl font-bold border ${isSelected ? activeColor : 'border-zinc-700 text-zinc-400 hover:bg-zinc-800/50'}`}
                     >
                       {n}
                     </button>
@@ -459,7 +459,7 @@ export default function App() {
                   id="autoHide" 
                   checked={autoHide} 
                   onChange={(e) => setAutoHide(e.target.checked)}
-                  className="rounded border-zinc-700 bg-zinc-950 text-amber-500 focus:ring-amber-500"
+                  className="rounded border-zinc-700 bg-zinc-950 text-live-500 focus:ring-live-500"
                 />
                 <label htmlFor="autoHide" className="text-[11px] leading-tight text-zinc-400">Auto hide</label>
               </div>
@@ -468,7 +468,7 @@ export default function App() {
                 <button
                   onClick={handleLiveConfirm}
                   disabled={!liveWinner || liveIsNatural === null}
-                  className="flex-1 py-2 bg-green-600 hover:bg-green-700 disabled:opacity-50 disabled:hover:bg-green-600 text-white rounded text-sm font-medium transition-colors"
+                  className="flex-1 py-2 bg-live-500 hover:bg-live-600 disabled:opacity-50 disabled:hover:bg-live-500 text-zinc-950 rounded text-sm font-medium transition-colors"
                 >
                   Confirm
                 </button>
@@ -552,14 +552,14 @@ export default function App() {
       <div className="flex-none flex bg-zinc-900 border-t border-zinc-800 pb-2 pt-1 px-2 z-20">
         <button
           onClick={() => setActiveTab('chart')}
-          className={`flex-1 py-2 flex flex-col items-center justify-center gap-1 rounded-lg transition-colors ${activeTab === 'chart' ? 'text-amber-500 bg-amber-500/10' : 'text-zinc-400 hover:text-zinc-100 hover:bg-zinc-800/50'}`}
+          className={`flex-1 py-2 flex flex-col items-center justify-center gap-1 rounded-lg transition-colors ${activeTab === 'chart' ? (appMode === 'live' ? 'text-live-500 bg-live-500/10' : 'text-amber-500 bg-amber-500/10') : 'text-zinc-400 hover:text-zinc-100 hover:bg-zinc-800/50'}`}
         >
           <LineChart className="w-5 h-5" />
           <span className="text-[10px] font-medium uppercase tracking-wider">Chart</span>
         </button>
         <button
           onClick={() => setActiveTab('log')}
-          className={`flex-1 py-2 flex flex-col items-center justify-center gap-1 rounded-lg transition-colors ${activeTab === 'log' ? 'text-amber-500 bg-amber-500/10' : 'text-zinc-400 hover:text-zinc-100 hover:bg-zinc-800/50'}`}
+          className={`flex-1 py-2 flex flex-col items-center justify-center gap-1 rounded-lg transition-colors ${activeTab === 'log' ? (appMode === 'live' ? 'text-live-500 bg-live-500/10' : 'text-amber-500 bg-amber-500/10') : 'text-zinc-400 hover:text-zinc-100 hover:bg-zinc-800/50'}`}
         >
           <List className="w-5 h-5" />
           <span className="text-[10px] font-medium uppercase tracking-wider">Audit Log</span>

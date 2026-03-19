@@ -1,1 +1,6 @@
 @import "tailwindcss";
+
+@theme {
+  --color-live-500: #91D06C;
+  --color-live-600: #7bc055;
+}

@@ -238,7 +238,10 @@ const updateUI = () => {
   const nextUpcomingBet = getNextBet(currentLogs);
 
   // Update Chart
+  const color = appMode === 'simu' ? '#f59e0b' : '#91D06C';
   chart.data.datasets[0].data = currentChartData;
+  chart.data.datasets[0].borderColor = color;
+  chart.data.datasets[0].backgroundColor = color;
   chart.update();
 
   // Update Next Bet Indicator
@@ -302,7 +305,7 @@ const updateUI = () => {
     btnWinnerBanker.className = `aspect-square flex items-center justify-center rounded-lg text-xl font-bold border ${liveWinner === 'Banker' ? 'bg-red-600 border-red-600 text-white' : 'border-zinc-700 text-zinc-400 hover:bg-zinc-800/50'}`;
     
     // Update Natural Buttons
-    btnNaturalY.className = `aspect-square flex items-center justify-center rounded-lg text-xl font-bold border ${liveIsNatural === true ? 'bg-green-600 border-green-600 text-white' : 'border-zinc-700 text-zinc-400 hover:bg-zinc-800/50'}`;
+    btnNaturalY.className = `aspect-square flex items-center justify-center rounded-lg text-xl font-bold border ${liveIsNatural === true ? 'bg-live-500 border-live-500 text-zinc-950' : 'border-zinc-700 text-zinc-400 hover:bg-zinc-800/50'}`;
     btnNaturalN.className = `aspect-square flex items-center justify-center rounded-lg text-xl font-bold border ${liveIsNatural === false ? 'bg-zinc-600 border-zinc-600 text-white' : 'border-zinc-700 text-zinc-400 hover:bg-zinc-800/50'}`;
   }
 };
@@ -317,27 +320,31 @@ const setMode = (mode) => {
     liveInputPanel.classList.add('hidden');
     isPanelOpen = false;
   } else {
-    btnModeLive.className = 'px-3 py-1 rounded-md text-sm font-medium transition-colors bg-amber-500 text-zinc-950';
+    btnModeLive.className = 'px-3 py-1 rounded-md text-sm font-medium transition-colors bg-live-500 text-zinc-950';
     btnModeSimu.className = 'px-3 py-1 rounded-md text-sm font-medium transition-colors text-zinc-400 hover:text-zinc-100';
     btnSimuRefresh.classList.add('hidden');
     btnLivePanelToggle.classList.remove('hidden');
     if (isPanelOpen) liveInputPanel.classList.remove('hidden');
   }
   updateUI();
+  setTab(activeTab);
 };
 
 const setTab = (tab) => {
   activeTab = tab;
+  const activeColor = appMode === 'live' ? 'text-live-500 bg-live-500/10' : 'text-amber-500 bg-amber-500/10';
+  const inactiveColor = 'text-zinc-400 hover:text-zinc-100 hover:bg-zinc-800/50';
+
   if (tab === 'chart') {
-    btnTabChart.className = 'flex-1 py-2 flex flex-col items-center justify-center gap-1 rounded-lg transition-colors text-amber-500 bg-amber-500/10';
-    btnTabLog.className = 'flex-1 py-2 flex flex-col items-center justify-center gap-1 rounded-lg transition-colors text-zinc-400 hover:text-zinc-100 hover:bg-zinc-800/50';
+    btnTabChart.className = `flex-1 py-2 flex flex-col items-center justify-center gap-1 rounded-lg transition-colors ${activeColor}`;
+    btnTabLog.className = `flex-1 py-2 flex flex-col items-center justify-center gap-1 rounded-lg transition-colors ${inactiveColor}`;
     tabChart.classList.remove('opacity-0', 'pointer-events-none');
     tabChart.classList.add('opacity-100', 'z-10');
     tabLog.classList.remove('opacity-100', 'z-10');
     tabLog.classList.add('opacity-0', 'pointer-events-none');
   } else {
-    btnTabLog.className = 'flex-1 py-2 flex flex-col items-center justify-center gap-1 rounded-lg transition-colors text-amber-500 bg-amber-500/10';
-    btnTabChart.className = 'flex-1 py-2 flex flex-col items-center justify-center gap-1 rounded-lg transition-colors text-zinc-400 hover:text-zinc-100 hover:bg-zinc-800/50';
+    btnTabLog.className = `flex-1 py-2 flex flex-col items-center justify-center gap-1 rounded-lg transition-colors ${activeColor}`;
+    btnTabChart.className = `flex-1 py-2 flex flex-col items-center justify-center gap-1 rounded-lg transition-colors ${inactiveColor}`;
     tabLog.classList.remove('opacity-0', 'pointer-events-none');
     tabLog.classList.add('opacity-100', 'z-10');
     tabChart.classList.remove('opacity-100', 'z-10');
@@ -363,10 +370,10 @@ btnLivePanelToggle.addEventListener('click', () => {
   isPanelOpen = !isPanelOpen;
   if (isPanelOpen) {
     liveInputPanel.classList.remove('hidden');
-    btnLivePanelToggle.className = 'p-2 rounded-lg transition-colors shadow-sm bg-amber-600 text-zinc-950';
+    btnLivePanelToggle.className = 'p-2 rounded-lg transition-colors shadow-sm bg-live-600 text-zinc-950';
   } else {
     liveInputPanel.classList.add('hidden');
-    btnLivePanelToggle.className = 'p-2 rounded-lg transition-colors shadow-sm bg-amber-500 hover:bg-amber-600 text-zinc-950';
+    btnLivePanelToggle.className = 'p-2 rounded-lg transition-colors shadow-sm bg-live-500 hover:bg-live-600 text-zinc-950';
   }
 });
 
@@ -403,7 +410,7 @@ btnLiveConfirm.addEventListener('click', () => {
   if (autoHide) {
     isPanelOpen = false;
     liveInputPanel.classList.add('hidden');
-    btnLivePanelToggle.className = 'p-2 rounded-lg transition-colors shadow-sm bg-amber-500 hover:bg-amber-600 text-zinc-950';
+    btnLivePanelToggle.className = 'p-2 rounded-lg transition-colors shadow-sm bg-live-500 hover:bg-live-600 text-zinc-950';
   }
 
   updateUI();
