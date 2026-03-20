@@ -344,16 +344,16 @@ export default function App() {
       {
         label: "Running Sum",
         data: currentChartData,
-        borderColor: appMode === "simu" ? "#F59E0B" : "#91D06C",
+        borderColor: appMode === "simu" ? "#F43F5E" : "#91D06C",
         backgroundColor:
           appMode === "simu"
-            ? "rgba(245, 158, 11, 0.1)"
+            ? "rgba(244, 63, 94, 0.1)"
             : "rgba(145, 208, 108, 0.1)",
         borderWidth: 2,
         tension: 0.1,
         pointRadius: 0,
         pointHoverRadius: 4,
-        pointBackgroundColor: appMode === "simu" ? "#F59E0B" : "#91D06C",
+        pointBackgroundColor: appMode === "simu" ? "#F43F5E" : "#91D06C",
       },
     ],
   };
@@ -464,7 +464,7 @@ export default function App() {
           <div className="flex items-center bg-zinc-950 p-1 rounded-lg border border-zinc-800">
             <button
               onClick={() => setAppMode("simu")}
-              className={`px-3 py-1 rounded-md text-sm font-medium transition-colors ${appMode === "simu" ? "bg-amber-500 text-zinc-950" : "text-zinc-400 hover:text-zinc-100"}`}
+              className={`px-3 py-1 rounded-md text-sm font-medium transition-colors ${appMode === "simu" ? "bg-rose-500 text-zinc-950 shadow-[0_0_10px_rgba(244,63,94,0.5)]" : "text-zinc-400 hover:text-zinc-100"}`}
             >
               Simu
             </button>
@@ -494,7 +494,7 @@ export default function App() {
         {appMode === "simu" ? (
           <button
             onClick={runSimulation}
-            className="p-2 bg-amber-500 hover:bg-amber-600 text-zinc-950 rounded-lg transition-colors shadow-sm"
+            className="p-2 bg-rose-500 hover:bg-rose-600 text-zinc-950 rounded-lg transition-colors shadow-[0_0_10px_rgba(244,63,94,0.5)]"
             title="Simulate New Shoe"
           >
             <RefreshCw className="w-5 h-5" />
@@ -686,7 +686,7 @@ export default function App() {
         <div className="flex-none flex bg-zinc-900 border-t border-zinc-800 p-2 gap-2 z-20">
           <button
             onClick={() => setActiveTab("chart")}
-            className={`flex-1 py-3 flex items-center justify-center rounded-lg transition-colors ${activeTab === "chart" ? (appMode === "live" ? "text-live-500 bg-live-500/10" : "text-amber-500 bg-amber-500/10") : "text-zinc-400 hover:text-zinc-100 hover:bg-zinc-800/50"}`}
+            className={`flex-1 py-3 flex items-center justify-center rounded-lg transition-colors ${activeTab === "chart" ? (appMode === "live" ? "text-live-500 bg-live-500/10" : "text-rose-500 bg-rose-500/10 shadow-[inset_0_0_10px_rgba(244,63,94,0.2)]") : "text-zinc-400 hover:text-zinc-100 hover:bg-zinc-800/50"}`}
           >
             <span className="text-xs font-bold uppercase tracking-wider">
               Chart
@@ -694,7 +694,7 @@ export default function App() {
           </button>
           <button
             onClick={() => setActiveTab("log")}
-            className={`flex-1 py-3 flex items-center justify-center rounded-lg transition-colors ${activeTab === "log" ? (appMode === "live" ? "text-live-500 bg-live-500/10" : "text-amber-500 bg-amber-500/10") : "text-zinc-400 hover:text-zinc-100 hover:bg-zinc-800/50"}`}
+            className={`flex-1 py-3 flex items-center justify-center rounded-lg transition-colors ${activeTab === "log" ? (appMode === "live" ? "text-live-500 bg-live-500/10" : "text-rose-500 bg-rose-500/10 shadow-[inset_0_0_10px_rgba(244,63,94,0.2)]") : "text-zinc-400 hover:text-zinc-100 hover:bg-zinc-800/50"}`}
           >
             <span className="text-xs font-bold uppercase tracking-wider">
               Audit Log

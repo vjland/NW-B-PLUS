@@ -45,6 +45,8 @@ const resetModal = document.getElementById('reset-modal');
 const btnResetCancel = document.getElementById('btn-reset-cancel');
 const btnResetConfirm = document.getElementById('btn-reset-confirm');
 
+const bottomNav = document.getElementById('bottom-nav');
+
 // Chart Setup
 const ctx = document.getElementById('myChart').getContext('2d');
 const labels = Array.from({ length: 80 }, (_, i) => i + 1);
@@ -55,13 +57,13 @@ const chart = new Chart(ctx, {
     datasets: [{
       label: 'Running Sum',
       data: [],
-      borderColor: '#F59E0B',
-      backgroundColor: 'rgba(245, 158, 11, 0.1)',
+      borderColor: '#F43F5E',
+      backgroundColor: 'rgba(244, 63, 94, 0.1)',
       borderWidth: 2,
       tension: 0.1,
       pointRadius: 0,
       pointHoverRadius: 4,
-      pointBackgroundColor: '#F59E0B',
+      pointBackgroundColor: '#F43F5E',
     }]
   },
   options: {
@@ -238,7 +240,7 @@ const updateUI = () => {
   const nextUpcomingBet = getNextBet(currentLogs);
 
   // Update Chart
-  const color = appMode === 'simu' ? '#f59e0b' : '#91D06C';
+  const color = appMode === 'simu' ? '#F43F5E' : '#91D06C';
   chart.data.datasets[0].data = currentChartData;
   chart.data.datasets[0].borderColor = color;
   chart.data.datasets[0].backgroundColor = color;
@@ -274,7 +276,7 @@ const updateUI = () => {
     let betClass = 'text-blue-200/50';
     if (log.betResult === 'Win') betClass = 'bg-green-500/20 text-green-400';
     else if (log.betResult === 'Loss') betClass = 'bg-red-500/20 text-red-400';
-    else if (log.betResult === 'Push') betClass = 'bg-amber-500/20 text-amber-400';
+    else if (log.betResult === 'Push') betClass = 'bg-rose-500/20 text-rose-400';
 
     let sumColor = 'text-zinc-100';
     let sumPrefix = '';
@@ -315,12 +317,13 @@ const setMode = (mode) => {
   appMode = mode;
   const liveCalculator = document.getElementById('live-calculator');
   if (mode === 'simu') {
-    btnModeSimu.className = 'px-3 py-1 rounded-md text-sm font-medium transition-colors bg-amber-500 text-zinc-950';
+    btnModeSimu.className = 'px-3 py-1 rounded-md text-sm font-medium transition-colors bg-rose-500 text-zinc-950 shadow-[0_0_10px_rgba(244,63,94,0.5)]';
     btnModeLive.className = 'px-3 py-1 rounded-md text-sm font-medium transition-colors text-zinc-400 hover:text-zinc-100';
     btnSimuRefresh.classList.remove('hidden');
     btnLivePanelToggle.classList.add('hidden');
     liveInputPanel.classList.add('hidden');
     liveCalculator.classList.add('hidden');
+    bottomNav.classList.remove('hidden');
     isPanelOpen = false;
   } else {
     btnModeLive.className = 'px-3 py-1 rounded-md text-sm font-medium transition-colors bg-live-500 text-zinc-950';
@@ -328,6 +331,7 @@ const setMode = (mode) => {
     btnSimuRefresh.classList.add('hidden');
     btnLivePanelToggle.classList.remove('hidden');
     liveCalculator.classList.remove('hidden');
+    bottomNav.classList.add('hidden');
     if (isPanelOpen) liveInputPanel.classList.remove('hidden');
   }
   updateUI();
@@ -336,7 +340,7 @@ const setMode = (mode) => {
 
 const setTab = (tab) => {
   activeTab = tab;
-  const activeColor = appMode === 'live' ? 'text-live-500 bg-live-500/10' : 'text-amber-500 bg-amber-500/10';
+  const activeColor = appMode === 'live' ? 'text-live-500 bg-live-500/10' : 'text-rose-500 bg-rose-500/10 shadow-[inset_0_0_10px_rgba(244,63,94,0.2)]';
   const inactiveColor = 'text-zinc-400 hover:text-zinc-100 hover:bg-zinc-800/50';
 
   if (tab === 'chart') {
