@@ -276,7 +276,7 @@ const updateUI = () => {
     let betClass = 'text-blue-200/50';
     if (log.betResult === 'Win') betClass = 'bg-green-500/20 text-green-400';
     else if (log.betResult === 'Loss') betClass = 'bg-red-500/20 text-red-400';
-    else if (log.betResult === 'Push') betClass = 'bg-rose-500/20 text-rose-400';
+    else if (log.betResult === 'Push') betClass = 'bg-[#D53E0F]/20 text-[#D53E0F]';
 
     let sumColor = 'text-zinc-100';
     let sumPrefix = '';
@@ -317,7 +317,7 @@ const setMode = (mode) => {
   appMode = mode;
   const liveCalculator = document.getElementById('live-calculator');
   if (mode === 'simu') {
-    btnModeSimu.className = 'px-3 py-1 rounded-md text-sm font-medium transition-colors bg-rose-500 text-zinc-950 shadow-[0_0_10px_rgba(244,63,94,0.5)]';
+    btnModeSimu.className = 'px-3 py-1 rounded-md text-sm font-medium transition-colors bg-[#D53E0F] text-zinc-950 shadow-[0_0_10px_rgba(213,62,15,0.5)]';
     btnModeLive.className = 'px-3 py-1 rounded-md text-sm font-medium transition-colors text-zinc-400 hover:text-zinc-100';
     btnSimuRefresh.classList.remove('hidden');
     btnLivePanelToggle.classList.add('hidden');
@@ -340,7 +340,7 @@ const setMode = (mode) => {
 
 const setTab = (tab) => {
   activeTab = tab;
-  const activeColor = appMode === 'live' ? 'text-live-500 bg-live-500/10' : 'text-rose-500 bg-rose-500/10 shadow-[inset_0_0_10px_rgba(244,63,94,0.2)]';
+  const activeColor = appMode === 'live' ? 'text-live-500 bg-live-500/10' : 'text-[#D53E0F] bg-[#D53E0F]/10 shadow-[inset_0_0_10px_rgba(213,62,15,0.2)]';
   const inactiveColor = 'text-zinc-400 hover:text-zinc-100 hover:bg-zinc-800/50';
 
   if (tab === 'chart') {
