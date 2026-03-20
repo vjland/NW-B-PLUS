@@ -379,9 +379,14 @@ export default function App() {
         max: 20,
         title: { display: false },
         grid: {
-          display: false,
+          display: true,
+          color: "#18181b",
+          drawTicks: false,
         },
-        ticks: { color: "#A1A1AA" },
+        ticks: {
+          color: "#A1A1AA",
+          stepSize: 2,
+        },
       },
     },
     plugins: {

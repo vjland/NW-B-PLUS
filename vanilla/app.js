@@ -80,8 +80,15 @@ const chart = new Chart(ctx, {
       y: {
         min: -20, max: 20,
         title: { display: false },
-        grid: { display: false },
-        ticks: { color: '#A1A1AA' }
+        grid: { 
+          display: true, 
+          color: '#18181b',
+          drawTicks: false
+        },
+        ticks: { 
+          color: '#A1A1AA',
+          stepSize: 2
+        }
       }
     },
     plugins: {
