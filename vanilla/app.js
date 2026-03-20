@@ -242,10 +242,11 @@ const updateUI = () => {
   chart.data.datasets[0].data = currentChartData;
   chart.data.datasets[0].borderColor = color;
   chart.data.datasets[0].backgroundColor = color;
+  chart.options.scales.x.grid.color = appMode === 'live' ? 'transparent' : '#27272A';
   chart.update();
 
   // Update Next Bet Indicator
-  if (nextUpcomingBet) {
+  if (appMode === 'live' && nextUpcomingBet) {
     nextBetIndicator.classList.remove('hidden');
     nextBetIndicator.textContent = nextUpcomingBet.charAt(0);
     if (nextUpcomingBet === 'Banker') {
@@ -312,18 +313,21 @@ const updateUI = () => {
 
 const setMode = (mode) => {
   appMode = mode;
+  const liveCalculator = document.getElementById('live-calculator');
   if (mode === 'simu') {
     btnModeSimu.className = 'px-3 py-1 rounded-md text-sm font-medium transition-colors bg-amber-500 text-zinc-950';
     btnModeLive.className = 'px-3 py-1 rounded-md text-sm font-medium transition-colors text-zinc-400 hover:text-zinc-100';
     btnSimuRefresh.classList.remove('hidden');
     btnLivePanelToggle.classList.add('hidden');
     liveInputPanel.classList.add('hidden');
+    liveCalculator.classList.add('hidden');
     isPanelOpen = false;
   } else {
     btnModeLive.className = 'px-3 py-1 rounded-md text-sm font-medium transition-colors bg-live-500 text-zinc-950';
     btnModeSimu.className = 'px-3 py-1 rounded-md text-sm font-medium transition-colors text-zinc-400 hover:text-zinc-100';
     btnSimuRefresh.classList.add('hidden');
     btnLivePanelToggle.classList.remove('hidden');
+    liveCalculator.classList.remove('hidden');
     if (isPanelOpen) liveInputPanel.classList.remove('hidden');
   }
   updateUI();
@@ -336,15 +340,15 @@ const setTab = (tab) => {
   const inactiveColor = 'text-zinc-400 hover:text-zinc-100 hover:bg-zinc-800/50';
 
   if (tab === 'chart') {
-    btnTabChart.className = `flex-1 py-2 flex flex-col items-center justify-center gap-1 rounded-lg transition-colors ${activeColor}`;
-    btnTabLog.className = `flex-1 py-2 flex flex-col items-center justify-center gap-1 rounded-lg transition-colors ${inactiveColor}`;
+    btnTabChart.className = `flex-1 py-3 flex items-center justify-center rounded-lg transition-colors ${activeColor}`;
+    btnTabLog.className = `flex-1 py-3 flex items-center justify-center rounded-lg transition-colors ${inactiveColor}`;
     tabChart.classList.remove('opacity-0', 'pointer-events-none');
     tabChart.classList.add('opacity-100', 'z-10');
     tabLog.classList.remove('opacity-100', 'z-10');
     tabLog.classList.add('opacity-0', 'pointer-events-none');
   } else {
-    btnTabLog.className = `flex-1 py-2 flex flex-col items-center justify-center gap-1 rounded-lg transition-colors ${activeColor}`;
-    btnTabChart.className = `flex-1 py-2 flex flex-col items-center justify-center gap-1 rounded-lg transition-colors ${inactiveColor}`;
+    btnTabLog.className = `flex-1 py-3 flex items-center justify-center rounded-lg transition-colors ${activeColor}`;
+    btnTabChart.className = `flex-1 py-3 flex items-center justify-center rounded-lg transition-colors ${inactiveColor}`;
     tabLog.classList.remove('opacity-0', 'pointer-events-none');
     tabLog.classList.add('opacity-100', 'z-10');
     tabChart.classList.remove('opacity-100', 'z-10');

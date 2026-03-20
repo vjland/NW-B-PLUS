@@ -37,12 +37,62 @@
   <script src="https://cdn.jsdelivr.net/npm/hammerjs@2.0.8"></script>
   <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-zoom"></script>
   <script src="https://unpkg.com/lucide@latest"></script>
+  <script src="baccarat-calculator.js"></script>
 </head>
 <body class="h-[100dvh] w-full flex flex-col bg-zinc-950 text-zinc-100 font-sans overflow-hidden">
   <!-- Header -->
   <div class="flex-none flex justify-between items-center p-4 bg-zinc-900 border-b border-zinc-800 shadow-sm z-10">
     <div class="flex items-center gap-4">
-      <h1 class="text-xl font-bold text-zinc-100">NW-B</h1>
+      <svg width="32" height="32" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" class="flex-shrink-0">
+        <defs>
+          <filter id="blueNeonGlow" x="-50%" y="-50%" width="200%" height="200%">
+            <feGaussianBlur in="SourceGraphic" stdDeviation="1.5" result="blur"/>
+            <feFlood flood-color="#00FFFF" result="flood"/> <feComposite in="flood" in2="blur" operator="in" result="coloredBlur"/>
+            <feMerge>
+              <feMergeNode in="coloredBlur"/>
+              <feMergeNode in="SourceGraphic"/>
+            </feMerge>
+          </filter>
+
+          <filter id="redNeonGlow" x="-50%" y="-50%" width="200%" height="200%">
+            <feGaussianBlur in="SourceGraphic" stdDeviation="1.2" result="blur"/> <feFlood flood-color="#FF0000" result="flood"/> <feComposite in="flood" in2="blur" operator="in" result="coloredBlur"/>
+            <feMerge>
+              <feMergeNode in="coloredBlur"/>
+              <feMergeNode in="SourceGraphic"/>
+            </feMerge>
+          </filter>
+        </defs>
+
+        <rect width="64" height="64" rx="12" fill="#000000"/>
+        
+        <rect x="3" y="3" width="58" height="58" rx="10" stroke="#CCFFFF" stroke-width="3" filter="url(#blueNeonGlow)"/>
+        
+        <text 
+          x="26" 
+          y="42" 
+          font-family="'Times New Roman', Times, serif" 
+          font-size="32" 
+          font-style="italic"
+          font-weight="bold" 
+          fill="#80FFFF" 
+          text-anchor="middle"
+          filter="url(#blueNeonGlow)">
+          B
+        </text>
+        
+        <text 
+          x="46" 
+          y="26" 
+          font-family="'Times New Roman', Times, serif" 
+          font-size="20" 
+          font-style="italic"
+          font-weight="bold" 
+          fill="#FFB3B3" 
+          text-anchor="middle"
+          filter="url(#redNeonGlow)">
+          n
+        </text>
+      </svg>
       <div class="flex items-center bg-zinc-950 p-1 rounded-lg border border-zinc-800">
         <button id="btn-mode-simu" class="px-3 py-1 rounded-md text-sm font-medium transition-colors bg-amber-500 text-zinc-950">Simu</button>
         <button id="btn-mode-live" class="px-3 py-1 rounded-md text-sm font-medium transition-colors text-zinc-400 hover:text-zinc-100">Live</button>
@@ -111,15 +161,16 @@
     </div>
   </div>
 
+  <!-- Calculator (Live Mode Only) -->
+  <baccarat-calculator id="live-calculator" class="hidden z-20 px-4 py-4"></baccarat-calculator>
+
   <!-- Bottom Navigation -->
-  <div class="flex-none flex bg-zinc-900 border-t border-zinc-800 pb-2 pt-1 px-2 z-20">
-    <button id="btn-tab-chart" class="flex-1 py-2 flex flex-col items-center justify-center gap-1 rounded-lg transition-colors text-amber-500 bg-amber-500/10">
-      <i data-lucide="line-chart" class="w-5 h-5"></i>
-      <span class="text-[10px] font-medium uppercase tracking-wider">Chart</span>
+  <div class="flex-none flex bg-zinc-900 border-t border-zinc-800 p-2 gap-2 z-20">
+    <button id="btn-tab-chart" class="flex-1 py-3 flex items-center justify-center rounded-lg transition-colors text-amber-500 bg-amber-500/10">
+      <span class="text-xs font-bold uppercase tracking-wider">Chart</span>
     </button>
-    <button id="btn-tab-log" class="flex-1 py-2 flex flex-col items-center justify-center gap-1 rounded-lg transition-colors text-zinc-400 hover:text-zinc-100 hover:bg-zinc-800/50">
-      <i data-lucide="list" class="w-5 h-5"></i>
-      <span class="text-[10px] font-medium uppercase tracking-wider">Audit Log</span>
+    <button id="btn-tab-log" class="flex-1 py-3 flex items-center justify-center rounded-lg transition-colors text-zinc-400 hover:text-zinc-100 hover:bg-zinc-800/50">
+      <span class="text-xs font-bold uppercase tracking-wider">Audit Log</span>
     </button>
   </div>
 
