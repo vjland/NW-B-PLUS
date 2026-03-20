@@ -370,7 +370,7 @@ export default function App() {
         max: 79,
         title: { display: false },
         grid: {
-          color: appMode === "live" ? "transparent" : "#27272A",
+          display: false,
         },
         ticks: { color: "#A1A1AA" },
       },
@@ -379,7 +379,7 @@ export default function App() {
         max: 20,
         title: { display: false },
         grid: {
-          color: "#27272A",
+          display: false,
         },
         ticks: { color: "#A1A1AA" },
       },

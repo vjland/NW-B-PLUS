@@ -74,13 +74,13 @@ const chart = new Chart(ctx, {
       x: {
         min: 0, max: 79,
         title: { display: false },
-        grid: { color: '#27272A' },
+        grid: { display: false },
         ticks: { color: '#A1A1AA' }
       },
       y: {
         min: -20, max: 20,
         title: { display: false },
-        grid: { color: '#27272A' },
+        grid: { display: false },
         ticks: { color: '#A1A1AA' }
       }
     },
@@ -244,7 +244,6 @@ const updateUI = () => {
   chart.data.datasets[0].data = currentChartData;
   chart.data.datasets[0].borderColor = color;
   chart.data.datasets[0].backgroundColor = color;
-  chart.options.scales.x.grid.color = appMode === 'live' ? 'transparent' : '#27272A';
   chart.update();
 
   // Update Next Bet Indicator
